@@ -13,10 +13,93 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\SpaceShips">
+      <UniqueIdentifier>{10694883-2f99-4f93-be11-daf1429a863f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\SpaceShips">
+      <UniqueIdentifier>{cace1439-4116-4511-8fa3-a6e042d344e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Entities">
+      <UniqueIdentifier>{6f24da55-2c4b-4344-8a41-f1611cb28482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Managers">
+      <UniqueIdentifier>{d178b21e-65bf-452b-94f1-879f15aac8f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Entities">
+      <UniqueIdentifier>{cc9360ec-f6d3-43b6-9e1b-e3bf2d626c66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Managers">
+      <UniqueIdentifier>{757122b7-b887-4681-879a-c80a29ad1605}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.cpp">
+      <Filter>Pliki źródłowe\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\GameEntity.cpp">
+      <Filter>Pliki źródłowe\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Texture.cpp">
+      <Filter>Pliki źródłowe\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AssetManager.cpp">
+      <Filter>Pliki źródłowe\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AudioManager.cpp">
+      <Filter>Pliki źródłowe\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\GameManager.cpp">
+      <Filter>Pliki źródłowe\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Graphics.cpp">
+      <Filter>Pliki źródłowe\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\InputManager.cpp">
+      <Filter>Pliki źródłowe\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Timer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\main.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScreen.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.h">
+      <Filter>Pliki nagłówkowe\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\GameEntity.h">
+      <Filter>Pliki nagłówkowe\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Texture.h">
+      <Filter>Pliki nagłówkowe\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AssetManager.h">
+      <Filter>Pliki nagłówkowe\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AudioManager.h">
+      <Filter>Pliki nagłówkowe\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\GameManager.h">
+      <Filter>Pliki nagłówkowe\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Graphics.h">
+      <Filter>Pliki nagłówkowe\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\InputManager.h">
+      <Filter>Pliki nagłówkowe\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\MathHelper.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Timer.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScreen.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
