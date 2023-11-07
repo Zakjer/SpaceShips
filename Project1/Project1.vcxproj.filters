@@ -66,6 +66,15 @@
     <ClCompile Include="StartScreen.cpp">
       <Filter>Pliki źródłowe\SpaceShips</Filter>
     </ClCompile>
+    <ClCompile Include="Star.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+    <ClCompile Include="StarLayer.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundStars.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.h">
@@ -99,6 +108,15 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="StartScreen.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="StarLayer.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundStars.h">
       <Filter>Pliki nagłówkowe\SpaceShips</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #define _STARTSCREEN_H
 #include "../AnimatedTexture.h"
 #include "../InputManager.h"
+#include "BackgroundStars.h"
 
 using namespace QuickSDL;
 
@@ -10,6 +11,7 @@ class StartScreen : public GameEntity {
 private:
 
 	Timer* mTimer;
+	InputManager* mInput;
 
 	//Informacje na górze ekranu startowego
 	GameEntity* mTopBar;
@@ -24,6 +26,10 @@ private:
 	GameEntity* mPlayModes;
 	Texture* mOnePlayerMode;
 	Texture* mTwoPlayerMode;
+	Texture* mCursor;
+	Vector2 mCursorStartPos;
+	Vector2 mCursorOffset;
+	int mSelectedMode;
 
 	//Animacja ekranu
 	Vector2 mAnimationStartPos;
@@ -32,11 +38,15 @@ private:
 	float mAnimationTimer;
 	bool mAnimationDone;
 
+	BackgroundStars* mStars;
+
 
 public:
 
 	StartScreen();
 	~StartScreen();
+
+	void ChangeSelectedMode(int change);
 
 	void Update();
 
