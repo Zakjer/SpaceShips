@@ -10,15 +10,28 @@ StartScreen::StartScreen() {
 	mPlayerOne = new Texture("1UP", "emulogic.ttf", 32, { 200, 0, 0 });
 	mHiScore = new Texture("HI-SCORE", "emulogic.ttf", 32, { 200, 0, 0 });
 	mPlayerTwo = new Texture("2UP", "emulogic.ttf", 32, { 200, 0, 0 });
+	mPlayerOneScore = new Scoreboard();
+	mPlayerTwoScore = new Scoreboard();
+	mTopScore = new Scoreboard();
+	
 
 	mPlayerOne->Parent(mTopBar);
 	mHiScore->Parent(mTopBar);
 	mPlayerTwo->Parent(mTopBar);
+	mPlayerOneScore->Parent(mTopBar);
+	mPlayerTwoScore->Parent(mTopBar);
+	mTopScore->Parent(mTopBar);
 
 	//Pozycjonowanie informacji
 	mPlayerOne->Pos(Vector2(-Graphics::Instance()->SCREEN_WIDTH*0.35f, 0.0f));
-	mHiScore->Pos(VEC2_ZERO);
-	mPlayerTwo->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.35f, 0.0f));
+	mHiScore->Pos(Vector2(-30.0f, 0.0f));
+	mPlayerTwo->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.2f, 0.0f));
+
+	mPlayerOneScore->Pos(Vector2(-Graphics::Instance()->SCREEN_WIDTH * 0.23f, 40.0f));
+	mTopScore->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH*0.05f, 40.0f));
+	mPlayerTwoScore->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.32f, 40.0f));
+
+	mTopScore->Score(30000);
 
 	//"Rodzicem" TopBar jest StartScreen
 	mTopBar->Parent(this);
@@ -75,6 +88,12 @@ StartScreen::~StartScreen() {
 	mHiScore = NULL;
 	delete mPlayerTwo;
 	mPlayerTwo = NULL;
+	delete mPlayerOneScore;
+	mPlayerOneScore = NULL;
+	delete mPlayerTwoScore;
+	mPlayerTwoScore = NULL;
+	delete mTopScore;
+	mTopScore = NULL;
 
 	//Usuwanie logo
 	delete mLogo;
@@ -129,8 +148,12 @@ void StartScreen::Update() {
 void StartScreen::Render() {
 
 	mPlayerOne->Render();
-	mHiScore->Render();
 	mPlayerTwo->Render();
+	mHiScore->Render();
+	
+	mPlayerOneScore->Render();
+	mPlayerTwoScore->Render();
+	mTopScore->Render();
 
 	mLogo->Render();
 
