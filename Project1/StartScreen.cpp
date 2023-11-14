@@ -64,14 +64,7 @@ StartScreen::StartScreen() {
 	mCursorOffset = Vector2(0.0f, 70.0f);
 	mSelectedMode = 0;
 
-	//Animacja ekranu
-	mAnimationStartPos = Vector2(0.0f, Graphics::Instance()->SCREEN_HEIGHT);
-	mAnimationEndPos = Vector2(0.0f, 0.0f);
-	mAnimationTotalTime = 5.0f;
-	mAnimationTimer = 0.0f;
-	mAnimationDone = false;
-
-	Pos(mAnimationStartPos);
+	ResetAnimation();
 
 	mStars = BackgroundStars::Instance();
 	mStars->Scroll(true);
@@ -108,6 +101,20 @@ StartScreen::~StartScreen() {
 	mTwoPlayerMode = NULL;
 	delete mCursor;
 	mCursor = NULL;
+}
+
+void StartScreen::ResetAnimation() {
+	mAnimationStartPos = Vector2(0.0f, Graphics::Instance()->SCREEN_HEIGHT);
+	mAnimationEndPos = Vector2(0.0f, 0.0f);
+	mAnimationTotalTime = 5.0f;
+	mAnimationTimer = 0.0f;
+	mAnimationDone = false;
+
+	Pos(mAnimationStartPos);
+}
+
+int StartScreen::SelectedMode() {
+	return mSelectedMode;
 }
 
 void StartScreen::ChangeSelectedMode(int change) {

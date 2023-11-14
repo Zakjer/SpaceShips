@@ -28,7 +28,7 @@
     <Filter Include="Pliki źródłowe\Entities">
       <UniqueIdentifier>{cc9360ec-f6d3-43b6-9e1b-e3bf2d626c66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\Managers">
+    <Filter Include="Pliki źródłowe\SpaceShips\Managers">
       <UniqueIdentifier>{757122b7-b887-4681-879a-c80a29ad1605}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -43,19 +43,19 @@
       <Filter>Pliki źródłowe\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AssetManager.cpp">
-      <Filter>Pliki źródłowe\Managers</Filter>
+      <Filter>Pliki źródłowe\SpaceShips\Managers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AudioManager.cpp">
-      <Filter>Pliki źródłowe\Managers</Filter>
+      <Filter>Pliki źródłowe\SpaceShips\Managers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\GameManager.cpp">
-      <Filter>Pliki źródłowe\Managers</Filter>
+      <Filter>Pliki źródłowe\SpaceShips\Managers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Graphics.cpp">
-      <Filter>Pliki źródłowe\Managers</Filter>
+      <Filter>Pliki źródłowe\SpaceShips\Managers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\InputManager.cpp">
-      <Filter>Pliki źródłowe\Managers</Filter>
+      <Filter>Pliki źródłowe\SpaceShips\Managers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Timer.cpp">
       <Filter>Pliki źródłowe</Filter>
@@ -76,6 +76,9 @@
       <Filter>Pliki źródłowe\SpaceShips</Filter>
     </ClCompile>
     <ClCompile Include="Scoreboard.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenManager.cpp">
       <Filter>Pliki źródłowe\SpaceShips</Filter>
     </ClCompile>
   </ItemGroup>
@@ -123,6 +126,9 @@
       <Filter>Pliki nagłówkowe\SpaceShips</Filter>
     </ClInclude>
     <ClInclude Include="Scoreboard.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenManager.h">
       <Filter>Pliki nagłówkowe\SpaceShips</Filter>
     </ClInclude>
   </ItemGroup>

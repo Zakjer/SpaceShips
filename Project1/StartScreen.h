@@ -50,6 +50,10 @@ public:
 	StartScreen();
 	~StartScreen();
 
+	void ResetAnimation();
+
+	int SelectedMode();
+
 	void ChangeSelectedMode(int change);
 
 	void Update();
