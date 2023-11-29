@@ -81,6 +81,12 @@
     <ClCompile Include="ScreenManager.cpp">
       <Filter>Pliki źródłowe\SpaceShips</Filter>
     </ClCompile>
+    <ClCompile Include="PlayScreen.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaySideBar.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.h">
@@ -129,6 +135,12 @@
       <Filter>Pliki nagłówkowe\SpaceShips</Filter>
     </ClInclude>
     <ClInclude Include="ScreenManager.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScreen.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaySideBar.h">
       <Filter>Pliki nagłówkowe\SpaceShips</Filter>
     </ClInclude>
   </ItemGroup>
