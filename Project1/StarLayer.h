@@ -5,7 +5,7 @@
 class StarLayer {
 
 private:
-	static const int STAR_COUNT = 40;
+	static const int STAR_COUNT = 20;
 	Star* mStars[STAR_COUNT];
 
 public:

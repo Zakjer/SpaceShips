@@ -145,6 +145,7 @@
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Texture.cpp" />
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Timer.cpp" />
     <ClCompile Include="BackgroundStars.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
     <ClCompile Include="PlaySideBar.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Texture.h" />
     <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Timer.h" />
     <ClInclude Include="BackgroundStars.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="PlayScreen.h" />
     <ClInclude Include="PlaySideBar.h" />
     <ClInclude Include="Scoreboard.h" />
