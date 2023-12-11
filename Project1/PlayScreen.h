@@ -1,8 +1,5 @@
 #ifndef _PLAYSCREEN_H
 #define _PLAYSCREEN_H
-#include "../InputManager.h"
-#include "BackgroundStars.h"
-#include "PlaySideBar.h"
 #include "Level.h"
 
 class PlayScreen : public GameEntity {
@@ -25,6 +22,8 @@ private:
 	Level* mLevel;
 	bool mLevelStarted;
 	int mCurrentStage;
+
+	Player* mPlayer;
 
 private:
 	void StartNextLevel();
