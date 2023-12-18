@@ -3,6 +3,7 @@
 Player::Player() {
 	mTimer = Timer::Instance();
 	mInput = InputManager::Instance();
+	mAudio = AudioManager::Instance();
 
 	mVisible = false;
 	mAnimating = false;
@@ -16,14 +17,23 @@ Player::Player() {
 
 	mMoveSpeed = 300.0f;
 	mMoveBounds = Vector2(40.0f, 720.0f);
+
+	mDeathAnimation = new AnimatedTexture("playerexp.png", 0, 0, 125, 128, 4, 1.0f, AnimatedTexture::horizontal);
+	mDeathAnimation->Parent(this);
+	mDeathAnimation->Pos(VEC2_ZERO);
+	mDeathAnimation->WrapMode(AnimatedTexture::once);
 }
 
 Player::~Player() {
 	mTimer = NULL;
 	mInput = NULL;
+	mAudio = NULL;
 
 	delete mShip;
 	mShip = NULL;
+
+	delete mDeathAnimation;
+	mDeathAnimation = NULL;
 }
 
 void Player::HandleMovement() {
@@ -63,8 +73,18 @@ void Player::AddScore(int change) {
 	mScore += change;
 }
 
+void Player::WasHit() {
+	mLives--;
+	mDeathAnimation->ResetAnimation();
+	mAnimating = true;
+	mAudio->PlaySFX("playerdestroyed.wav");
+}
+
 void Player::Update() {
 	if (mAnimating) {
+
+		mDeathAnimation->Update();
+		mAnimating = mDeathAnimation->IsAnimating();
 
 	}
 	else {
@@ -78,6 +98,7 @@ void Player::Render() {
 	if (mVisible) {
 
 		if (mAnimating) {
+			mDeathAnimation->Render();
 
 		}
 		else {

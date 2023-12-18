@@ -2,6 +2,7 @@
 #define _PLAYER_H
 #include "../AnimatedTexture.h"
 #include "../InputManager.h"
+#include "../AudioManager.h"
 
 using namespace QuickSDL;
 
@@ -9,6 +10,7 @@ class Player : public GameEntity {
 private:
 	Timer* mTimer;
 	InputManager* mInput;
+	AudioManager* mAudio;
 
 	bool mVisible;
 	bool mAnimating;
@@ -17,6 +19,8 @@ private:
 	int mLives;
 
 	Texture* mShip;
+
+	AnimatedTexture* mDeathAnimation;
 
 	float mMoveSpeed;
 	Vector2 mMoveBounds;
@@ -35,6 +39,8 @@ public:
 	int Lives();
 
 	void AddScore(int change);
+
+	void WasHit();
 
 	void Update();
 
