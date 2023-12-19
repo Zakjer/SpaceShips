@@ -3,6 +3,7 @@
 #include "../AnimatedTexture.h"
 #include "../InputManager.h"
 #include "../AudioManager.h"
+#include "Bullet.h"
 
 using namespace QuickSDL;
 
@@ -25,8 +26,12 @@ private:
 	float mMoveSpeed;
 	Vector2 mMoveBounds;
 
+	static const int MAX_BULLETS = 2;
+	Bullet* mBullets[MAX_BULLETS];
+
 private:
 	void HandleMovement();
+	void HandleFiring();
 
 public:
 	Player();

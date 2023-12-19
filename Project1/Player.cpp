@@ -22,6 +22,10 @@ Player::Player() {
 	mDeathAnimation->Parent(this);
 	mDeathAnimation->Pos(VEC2_ZERO);
 	mDeathAnimation->WrapMode(AnimatedTexture::once);
+
+	for (int i = 0; i < MAX_BULLETS; i++) {
+		mBullets[i] = new Bullet();
+	}
 }
 
 Player::~Player() {
@@ -34,14 +38,19 @@ Player::~Player() {
 
 	delete mDeathAnimation;
 	mDeathAnimation = NULL;
+
+	for (int i = 0; i < MAX_BULLETS; i++) {
+		delete mBullets[i];
+		mBullets[i] = NULL;
+	}
 }
 
 void Player::HandleMovement() {
 	if (mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
-		Translate(VEC2_RIGHT * mMoveSpeed * mTimer->DeltaTime());
+		Translate(VEC2_RIGHT * mMoveSpeed * mTimer->DeltaTime(), world);
 	}
 	else if(mInput->KeyDown(SDL_SCANCODE_LEFT)) {
-		Translate(-VEC2_RIGHT * mMoveSpeed * mTimer->DeltaTime());
+		Translate(-VEC2_RIGHT * mMoveSpeed * mTimer->DeltaTime(), world);
 	}
 
 	Vector2 pos = Pos(local);
@@ -51,6 +60,20 @@ void Player::HandleMovement() {
 		pos.x = mMoveBounds.y;
 
 	Pos(pos);
+}
+
+void Player::HandleFiring() {
+	if (mInput->KeyPressed(SDL_SCANCODE_SPACE)) {
+		for (int i = 0; i < MAX_BULLETS; i++) {
+
+			if (!mBullets[i]->Active()) {
+
+				mBullets[i]->Fire(Pos());
+				mAudio->PlaySFX("fire.wav");
+				break;
+			}
+		}
+	}
 }
 
 void Player::Visible(bool visible) {
@@ -90,8 +113,12 @@ void Player::Update() {
 	else {
 		if (Active()) {
 			HandleMovement();
+			HandleFiring();
 		}
 	}
+
+	for (int i = 0; i < MAX_BULLETS; i++)
+		mBullets[i]->Update();
 }
 
 void Player::Render() {
@@ -105,4 +132,7 @@ void Player::Render() {
 			mShip->Render();
 		}
 	}
+
+	for (int i = 0; i < MAX_BULLETS; i++)
+		mBullets[i]->Render();
 }
