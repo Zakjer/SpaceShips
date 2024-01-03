@@ -47,6 +47,8 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mGameOverLabelOnScreen = 1.0f;
 
 	mCurrentState = running;
+
+	mEnemy = new Enemy(0);
 }
 
 Level::~Level() {
@@ -66,6 +68,9 @@ Level::~Level() {
 
 	delete mGameOverLabel;
 	mGameOverLabel = NULL;
+
+	delete mEnemy;
+	mEnemy = NULL;
 }
 
 void Level::StartStage() {
@@ -97,7 +102,6 @@ void Level::HandleStartLabels() {
 
 
 }
-
 
 void Level::HandleCollisions() {
 
@@ -133,8 +137,8 @@ void Level::HandlePlayerDeath() {
 				mPlayerHit = false;
 				mStars->Scroll(true);
 			}
-
 		}
+
 		else {
 
 			if (mGameOverTimer == 0.0f)
@@ -163,6 +167,8 @@ void Level::Update() {
 	}
 	else {
 
+		mEnemy->Update();
+
 		HandleCollisions();
 
 		if (mPlayerHit) {
@@ -190,6 +196,8 @@ void Level::Render() {
 		}
 	}
 	else {
+
+		mEnemy->Render();
 
 		if (mPlayerHit) {
 

@@ -4,6 +4,7 @@
 #include "PlaySideBar.h"
 #include "BackgroundStars.h"
 #include "Player.h"
+#include "Enemy.h"
 
 class Level : public GameEntity {
 
@@ -42,6 +43,8 @@ private:
 	float mGameOverLabelOnScreen;
 
 	LEVEL_STATES mCurrentState;
+
+	Enemy* mEnemy;
 
 private:
 	void StartStage();
