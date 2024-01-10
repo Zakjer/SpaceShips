@@ -1,14 +1,17 @@
-#ifndef _LEVEL_H
-#define _LEVEL_H
-#include "../Inputmanager.h"
+#ifndef Level_h
+#define Level_h
+#include "../InputManager.h"
 #include "PlaySideBar.h"
 #include "BackgroundStars.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "Butterfly.h"
+#include "Wasp.h"
+#include "Boss.h"
 
 class Level : public GameEntity {
 
 public:
+
 	enum LEVEL_STATES { running, finished, gameover };
 
 private:
@@ -30,6 +33,7 @@ private:
 	float mReadyLabelOnScreen;
 	float mReadyLabelOffScreen;
 
+
 	Player* mPlayer;
 	bool mPlayerHit;
 	float mPlayerRespawnDelay;
@@ -44,15 +48,33 @@ private:
 
 	LEVEL_STATES mCurrentState;
 
-	Enemy* mEnemy;
+	Formation* mFormation;
+
+
+	const int MAX_BUTTERFLIES = 16;
+	int mButterflyCount;
+
+	const int MAX_WASPS = 20;
+	int mWaspCount;
+
+	const int MAX_BOSSES = 4;
+	int mBossCount;
+
+	std::vector<Enemy*> mEnemies;
 
 private:
+
 	void StartStage();
 	void HandleStartLabels();
 	void HandleCollisions();
 	void HandlePlayerDeath();
 
+
+	void HandleEnemySpawning();
+	void HandleEnemyFormation();
+
 public:
+
 	Level(int stage, PlaySideBar* sideBar, Player* player);
 	~Level();
 

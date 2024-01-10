@@ -146,8 +146,11 @@
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Timer.cpp" />
     <ClCompile Include="BackgroundStars.cpp" />
     <ClCompile Include="BezierPath.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Butterfly.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Formation.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
@@ -157,6 +160,7 @@
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="StarLayer.cpp" />
     <ClCompile Include="StartScreen.cpp" />
+    <ClCompile Include="Wasp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.h" />
@@ -171,8 +175,11 @@
     <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\Timer.h" />
     <ClInclude Include="BackgroundStars.h" />
     <ClInclude Include="BezierPath.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Butterfly.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Formation.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScreen.h" />
@@ -182,6 +189,7 @@
     <ClInclude Include="Star.h" />
     <ClInclude Include="StarLayer.h" />
     <ClInclude Include="StartScreen.h" />
+    <ClInclude Include="Wasp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -102,6 +102,18 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Pliki źródłowe\SpaceShips</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+    <ClCompile Include="Butterfly.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+    <ClCompile Include="Formation.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+    <ClCompile Include="Wasp.cpp">
+      <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.h">
@@ -171,6 +183,18 @@
       <Filter>Pliki nagłówkowe\SpaceShips</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="Butterfly.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation.h">
+      <Filter>Pliki nagłówkowe\SpaceShips</Filter>
+    </ClInclude>
+    <ClInclude Include="Wasp.h">
       <Filter>Pliki nagłówkowe\SpaceShips</Filter>
     </ClInclude>
   </ItemGroup>

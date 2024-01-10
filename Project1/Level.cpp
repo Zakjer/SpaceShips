@@ -1,12 +1,14 @@
 #include "Level.h"
 
-Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
+Level::Level(int stage, PlaySideBar* sidebar, Player* player) {
+
 	mTimer = Timer::Instance();
-	mSideBar = sideBar;
+	mSideBar = sidebar;
 	mSideBar->SetLevel(stage);
 	mStars = BackgroundStars::Instance();
 
 	mStage = stage;
+
 	mStageStarted = false;
 
 	mLabelTimer = 0.0f;
@@ -15,10 +17,11 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mStageLabel->Parent(this);
 	mStageLabel->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.35f, Graphics::Instance()->SCREEN_HEIGHT * 0.5f));
 
-	mStageNumber = new Scoreboard({75, 75, 200});
+	mStageNumber = new Scoreboard({ 75, 75, 200 });
 	mStageNumber->Score(mStage);
 	mStageNumber->Parent(this);
 	mStageNumber->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.5f, Graphics::Instance()->SCREEN_HEIGHT * 0.5f));
+
 
 	mStageLabelOnScreen = 0.0f;
 	mStageLabelOffScreen = 1.5f;
@@ -31,7 +34,6 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mReadyLabelOffScreen = mReadyLabelOnScreen + 3.0f;
 
 	mPlayer = player;
-
 	mPlayerHit = false;
 	mPlayerRespawnDelay = 3.0f;
 	mPlayerRespawnTimer = 0.0f;
@@ -48,10 +50,18 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 
 	mCurrentState = running;
 
-	mEnemy = new Enemy(0);
+	mFormation = new Formation();
+	mFormation->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.4, 150.0f));
+
+	Enemy::SetFormation(mFormation);
+
+	mButterflyCount = 0;
+	mWaspCount = 0;
+	mBossCount = 0;
 }
 
 Level::~Level() {
+
 	mTimer = NULL;
 	mSideBar = NULL;
 	mStars = NULL;
@@ -69,11 +79,19 @@ Level::~Level() {
 	delete mGameOverLabel;
 	mGameOverLabel = NULL;
 
-	delete mEnemy;
-	mEnemy = NULL;
+	delete mFormation;
+	mFormation = NULL;
+
+	for (int i = 0; i < mEnemies.size(); i++) {
+
+		delete mEnemies[i];
+		mEnemies[i] = NULL;
+	}
 }
 
+
 void Level::StartStage() {
+
 	mStageStarted = true;
 }
 
@@ -102,6 +120,7 @@ void Level::HandleStartLabels() {
 
 
 }
+
 
 void Level::HandleCollisions() {
 
@@ -137,8 +156,8 @@ void Level::HandlePlayerDeath() {
 				mPlayerHit = false;
 				mStars->Scroll(true);
 			}
-		}
 
+		}
 		else {
 
 			if (mGameOverTimer == 0.0f)
@@ -152,6 +171,52 @@ void Level::HandlePlayerDeath() {
 		}
 	}
 }
+
+
+void Level::HandleEnemySpawning() {
+
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_S) && mButterflyCount < MAX_BUTTERFLIES) {
+
+		mEnemies.push_back(new Butterfly(mButterflyCount, 0, false));
+		mButterflyCount++;
+	}
+
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_D) && mWaspCount < MAX_WASPS) {
+
+		mEnemies.push_back(new Wasp(mWaspCount, 0, false, false));
+		mWaspCount++;
+	}
+
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F) && mBossCount < MAX_BOSSES) {
+
+		mEnemies.push_back(new Boss(mBossCount, 0, false));
+		mBossCount++;
+	}
+}
+
+
+void Level::HandleEnemyFormation() {
+
+
+	mFormation->Update();
+	if (mButterflyCount == MAX_BUTTERFLIES && mWaspCount == MAX_WASPS && mBossCount == MAX_BOSSES) {
+
+		bool flyIn = false;
+
+		for (int i = 0; i < mEnemies.size(); i++) {
+
+			if (mEnemies[i]->CurrentState() == Enemy::flyIn)
+
+				flyIn = true;
+		}
+
+		if (!flyIn) {
+
+			mFormation->Lock();
+		}
+	}
+}
+
 
 Level::LEVEL_STATES Level::State() {
 
@@ -167,7 +232,11 @@ void Level::Update() {
 	}
 	else {
 
-		mEnemy->Update();
+		HandleEnemySpawning();
+		HandleEnemyFormation();
+
+		for (int i = 0; i < mEnemies.size(); i++)
+			mEnemies[i]->Update();
 
 		HandleCollisions();
 
@@ -186,18 +255,25 @@ void Level::Update() {
 
 void Level::Render() {
 
+
 	if (!mStageStarted) {
+
 		if (mLabelTimer > mStageLabelOnScreen && mLabelTimer < mStageLabelOffScreen) {
+
 			mStageLabel->Render();
 			mStageNumber->Render();
+
 		}
 		else if (mLabelTimer > mReadyLabelOnScreen && mLabelTimer < mReadyLabelOffScreen) {
+
 			mReadyLabel->Render();
+
 		}
 	}
 	else {
 
-		mEnemy->Render();
+		for (int i = 0; i < mEnemies.size(); i++)
+			mEnemies[i]->Render();
 
 		if (mPlayerHit) {
 
@@ -207,5 +283,6 @@ void Level::Render() {
 			if (mGameOverTimer >= mGameOverLabelOnScreen)
 				mGameOverLabel->Render();
 		}
+
 	}
 }
