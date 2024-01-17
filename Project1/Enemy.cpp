@@ -8,11 +8,14 @@ void Enemy::CreatePaths() {
 	int screenMidPoint = Graphics::Instance()->SCREEN_WIDTH * 0.4f;
 
 
+
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();
 	path->AddCurve({ Vector2(screenMidPoint + 50.0f, -10.0f), Vector2(screenMidPoint + 50.0f, -20.0f), Vector2(screenMidPoint + 50.0f, 30.0f), Vector2(screenMidPoint + 50.0f, 20.0f) }, 1);
 	path->AddCurve({ Vector2(screenMidPoint + 50.0f, 20.0f), Vector2(screenMidPoint + 50.0f, 100.0f), Vector2(75.0f, 325.0f), Vector2(75.0f, 425.0f) }, 25);
 	path->AddCurve({ Vector2(75.0f, 425.0f), Vector2(75.0f, 650.0f), Vector2(325.0f, 650.0f), Vector2(350.0f, 425.0f) }, 25);
+
+
 
 	sPaths.push_back(std::vector<Vector2>());
 	path->Sample(&sPaths[currentPath]);
@@ -60,6 +63,9 @@ Enemy::~Enemy() {
 		mTextures[i] = NULL;
 
 	}
+
+	printf("Enemy destructor called\n");
+
 }
 
 void Enemy::PathComplete() {
@@ -69,17 +75,27 @@ void Enemy::PathComplete() {
 		mCurrentState = dead;
 }
 
-Vector2 Enemy::FlyInTargetPosition() {
 
-	return sFormation->Pos() + mTargetPosition;
+void Enemy::JoinFormation() {
+
+	Pos(WorldFormationPosition());
+	Rotation(0);
+	Parent(sFormation);
+	mCurrentState = formation;
+
+}
+
+Vector2 Enemy::WorldFormationPosition() {
+
+	return sFormation->Pos() + LocalFormationPosition();
 }
 
 void Enemy::FlyInComplete() {
 
-	Pos(FlyInTargetPosition());
-	Rotation(0);
-	Parent(sFormation);
-	mCurrentState = formation;
+	if (mChallengeStage)
+		mCurrentState = dead;
+	else
+		JoinFormation();
 
 }
 
@@ -104,7 +120,7 @@ void Enemy::HandleFlyInState() {
 	}
 	else {
 
-		Vector2 dist = FlyInTargetPosition() - Pos();
+		Vector2 dist = WorldFormationPosition() - Pos();
 		Translate(dist.Normalized() * mTimer->DeltaTime() * mSpeed, world);
 
 		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
@@ -120,11 +136,14 @@ void Enemy::HandleFlyInState() {
 
 void Enemy::HandleFormationState() {
 
-	Pos(FormationPosition());
+	Pos(LocalFormationPosition());
 
 
 
 }
+
+
+
 
 void Enemy::HandleStates() {
 
@@ -153,11 +172,65 @@ void Enemy::HandleStates() {
 	}
 }
 
+void Enemy::RenderFlyInState() {
+
+	mTextures[0]->Render();
+}
+
+void Enemy::RenderFormationState() {
+
+	mTextures[sFormation->GetTick() % 2]->Render();
+
+}
+
+void Enemy::RenderStates() {
+
+	switch (mCurrentState) {
+
+	case flyIn:
+		RenderFlyInState();
+		break;
+
+	case formation:
+		RenderFormationState();
+		break;
+
+	case dive:
+
+		RenderDiveState();
+		break;
+
+	case dead:
+
+		RenderDeadState();
+		break;
+
+
+	}
+
+}
+
 
 Enemy::STATES Enemy::CurrentState() {
 
 	return mCurrentState;
 }
+
+Enemy::TYPES Enemy::Type() {
+
+	return mType;
+}
+
+void Enemy::Dive() {
+
+	Parent(NULL);
+	mCurrentState = dive;
+	mDiveStartPosition = Pos();
+	mCurrentWaypoint = 1;
+
+}
+
+
 
 void Enemy::Update() {
 
@@ -168,12 +241,6 @@ void Enemy::Update() {
 
 void Enemy::Render() {
 
-	if (Active()) {
-
-		if (mCurrentState == formation)
-			mTextures[sFormation->GetTick() % 2]->Render();
-		else
-			mTextures[0]->Render();
-
-	}
+	if (Active())
+		RenderStates();
 }

@@ -4,10 +4,6 @@ Butterfly::Butterfly(int index, int path, bool challengeStage)
 	: Enemy(index, path, challengeStage)
 
 {
-	if (!challengeStage) {
-
-		mTargetPosition = FormationPosition();
-	}
 
 	mTextures[0] = new Texture("butterfly.png");
 	mTextures[0]->Parent(this);
@@ -17,6 +13,7 @@ Butterfly::Butterfly(int index, int path, bool challengeStage)
 	mTextures[1]->Parent(this);
 	mTextures[1]->Pos(VEC2_ZERO);
 
+	mType = butterfly;
 }
 
 
@@ -27,7 +24,7 @@ Butterfly::~Butterfly() {
 }
 
 
-Vector2 Butterfly::FormationPosition() {
+Vector2 Butterfly::LocalFormationPosition() {
 
 	Vector2 retVal;
 
@@ -44,5 +41,14 @@ void Butterfly::HandleDiveState() {
 
 void Butterfly::HandleDeadState() {
 
+
+}
+
+void Butterfly::RenderDiveState() {
+
+
+}
+
+void Butterfly::RenderDeadState() {
 
 }
