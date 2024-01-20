@@ -234,10 +234,44 @@ void Level::HandleEnemyDiving() {
 				}
 			}
 		}
+		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_H)) {
+
+			for (int i = (int)mEnemies.size() - 1; i >= 0; i--) {
+
+				if (mEnemies[i]->Type() == Enemy::boss && mEnemies[i]->CurrentState() == Enemy::formation) {
+
+
+					mEnemies[i]->Dive();
+
+					int index = mEnemies[i]->Index();
+					int firstEscortIndex = (index % 2 == 0) ? (index * 2) : (index * 2 - 1);
+					int secondEscortIndex = firstEscortIndex + 4;
+					
+					for (int j = 0; j < mEnemies.size(); j++) {
+						if (mEnemies[j]->Type() == Enemy::butterfly && mEnemies[j]->CurrentState() == Enemy::formation
+							&& (mEnemies[j]->Index() == firstEscortIndex || mEnemies[j]->Index() == secondEscortIndex))
+							mEnemies[j]->Dive(1);
+					}
+
+					break;
+				}
+			}
+		}
+
+		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_B)) {
+
+			for (int i = (int)mEnemies.size() - 1; i >= 0; i--) {
+
+				if (mEnemies[i]->Type() == Enemy::butterfly && mEnemies[i]->CurrentState() == Enemy::formation) {
+
+
+					mEnemies[i]->Dive();
+					break;
+				}
+			}
+		}
+
 	}
-
-
-
 }
 
 Level::LEVEL_STATES Level::State() {

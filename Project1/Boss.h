@@ -6,6 +6,10 @@
 
 class Boss : public Enemy {
 
+private:
+	static std::vector<std::vector<Vector2>> sDivePaths;
+
+	bool mCapture;
 
 
 private:
@@ -22,13 +26,13 @@ private:
 
 public:
 
+	static void CreateDivePaths();
+
 	Boss(int index, int path, bool challengeStage);
 
 	~Boss();
 
-
-
-
+	void Dive(int type = 0);
 
 };
 

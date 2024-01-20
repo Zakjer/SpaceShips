@@ -221,7 +221,12 @@ Enemy::TYPES Enemy::Type() {
 	return mType;
 }
 
-void Enemy::Dive() {
+int Enemy::Index() {
+
+	return mIndex;
+}
+
+void Enemy::Dive(int type) {
 
 	Parent(NULL);
 	mCurrentState = dive;
@@ -229,8 +234,6 @@ void Enemy::Dive() {
 	mCurrentWaypoint = 1;
 
 }
-
-
 
 void Enemy::Update() {
 

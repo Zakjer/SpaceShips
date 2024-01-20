@@ -4,6 +4,10 @@
 
 class Butterfly : public Enemy {
 
+private:
+	static std::vector<std::vector<Vector2>> sDivePaths;
+
+	bool mEscort;
 
 private:
 
@@ -18,9 +22,13 @@ private:
 
 public:
 
+	static void CreateDivePaths();
+
 	Butterfly(int index, int path, bool challengeStage);
 
 	~Butterfly();
+
+	void Dive(int type = 0);
 
 };
 

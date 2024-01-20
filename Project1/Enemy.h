@@ -76,8 +76,9 @@ public:
 	STATES CurrentState();
 
 	TYPES Type();
+	int Index();
 
-	void Dive();
+	virtual void Dive(int type = 0);
 
 	void Update();
 

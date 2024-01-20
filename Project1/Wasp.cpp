@@ -119,7 +119,6 @@ void Wasp::HandleDiveState() {
 
 	}
 
-
 }
 
 
@@ -142,9 +141,7 @@ void Wasp::RenderDiveState() {
 	}
 
 	Vector2 finalPos = WorldFormationPosition();
-
 	Vector2 pathEndPos = mDiveStartPosition + sDivePaths[currentPath][sDivePaths[currentPath].size() - 1];
-
 	Graphics::Instance()->DrawLine(pathEndPos.x, pathEndPos.y, finalPos.x, finalPos.y);
 
 }
