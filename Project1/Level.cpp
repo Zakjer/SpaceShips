@@ -1,4 +1,6 @@
 #include "Level.h"
+#include <iostream>
+#include <filesystem>
 
 Level::Level(int stage, PlaySideBar* sidebar, Player* player) {
 
@@ -58,6 +60,16 @@ Level::Level(int stage, PlaySideBar* sidebar, Player* player) {
 	mButterflyCount = 0;
 	mWaspCount = 0;
 	mBossCount = 0;
+
+	std::string fullPath = SDL_GetBasePath();
+	fullPath.append("Assets/Level1.xml");
+	mSpawningPatterns.LoadFile(fullPath.c_str());
+
+	mCurrentFlyInPriority = 0;
+	mCurrentFlyInIndex = 0;
+	mSpawningFinished = false;
+	mSpawnDelay = 0.2f;
+	mSpawnTimer = 0.0f;
 }
 
 Level::~Level() {
@@ -175,22 +187,76 @@ void Level::HandlePlayerDeath() {
 
 void Level::HandleEnemySpawning() {
 
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_S) && mButterflyCount < MAX_BUTTERFLIES) {
+	mSpawnTimer += mTimer->DeltaTime();
+	if (mSpawnTimer >= mSpawnDelay) {
 
-		mEnemies.push_back(new Butterfly(mButterflyCount, 0, false));
-		mButterflyCount++;
-	}
+		XMLElement* element = mSpawningPatterns.FirstChildElement("Level")->FirstChild()->NextSiblingElement();
+		bool spawned = false;
+		bool priorityFound = false;
 
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_D) && mWaspCount < MAX_WASPS) {
+		while (element != NULL) {
 
-		mEnemies.push_back(new Wasp(mWaspCount, 0, false, false));
-		mWaspCount++;
-	}
+			int priority = element->IntAttribute("priority");
+			int path = element->IntAttribute("path");
+			XMLElement* child = element->FirstChildElement();
 
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F) && mBossCount < MAX_BOSSES) {
+			if (mCurrentFlyInPriority == priority) {
 
-		mEnemies.push_back(new Boss(mBossCount, 0, false));
-		mBossCount++;
+
+				priorityFound = true;
+				for (int i = 0; i < mCurrentFlyInIndex && child != NULL; i++) {
+
+					child = child->NextSiblingElement();
+				}
+
+				if (child != NULL) {
+					std::string type = child->Attribute("type");
+					int index = child->IntAttribute("index");
+
+					if (type.compare("Butterfly") == 0) {
+						mEnemies.push_back(new Butterfly(index, path, false));
+						mButterflyCount++;
+					}
+					else if (type.compare("Wasp") == 0) {
+						mEnemies.push_back(new Wasp(index, path, false, false));
+						mWaspCount++;
+					}
+					else if (type.compare("Boss") == 0) {
+						mEnemies.push_back(new Boss(index, path, false));
+						mBossCount++;
+					}
+
+					spawned = true;
+				}
+			}
+
+			element = element->NextSiblingElement();
+		}
+
+		if (!priorityFound) {
+			mSpawningFinished = true;
+		}
+		else {
+			
+			if (!spawned) {
+				bool flyingIn = false;
+
+				for (int i = 0; i < mEnemies.size(); i++) {
+					if (mEnemies[i]->CurrentState() == Enemy::flyIn)
+						flyingIn = true;
+				}
+
+				if (!flyingIn) {
+					mCurrentFlyInPriority++;
+					mCurrentFlyInIndex = 0;
+				}
+			}
+			else {
+				mCurrentFlyInIndex++;
+			}
+		}
+
+		mSpawnTimer = 0.0f;
 	}
 }
 
@@ -288,7 +354,9 @@ void Level::Update() {
 	}
 	else {
 
-		HandleEnemySpawning();
+		if(!mSpawningFinished)
+			HandleEnemySpawning();
+
 		HandleEnemyFormation();
 		HandleEnemyDiving();
 

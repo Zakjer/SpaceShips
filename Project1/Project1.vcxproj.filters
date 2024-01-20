@@ -31,6 +31,15 @@
     <Filter Include="Pliki źródłowe\SpaceShips\Managers">
       <UniqueIdentifier>{757122b7-b887-4681-879a-c80a29ad1605}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\TinyXML">
+      <UniqueIdentifier>{f4f3daf1-cb9e-45ab-876b-5cafc4c8e4c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\TinyXML">
+      <UniqueIdentifier>{c8db6b24-9c5c-43df-a71c-11827359f8d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Levels">
+      <UniqueIdentifier>{68008645-2ea6-4c0b-9d85-0bf1ecfe6fed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.cpp">
@@ -113,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="Wasp.cpp">
       <Filter>Pliki źródłowe\SpaceShips</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Pliki źródłowe\TinyXML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,5 +209,13 @@
     <ClInclude Include="Wasp.h">
       <Filter>Pliki nagłówkowe\SpaceShips</Filter>
     </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>Pliki nagłówkowe\TinyXML</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\x64\Debug\Assets\Level1.xml">
+      <Filter>Pliki źródłowe\Levels</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

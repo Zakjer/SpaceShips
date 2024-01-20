@@ -70,7 +70,7 @@ void Boss::HandleDiveState() {
 
 	int currentPath = mIndex % 2;
 
-	if (mCapture)
+	if (mCaptureDive)
 		currentPath += 2;
 
 	if (mCurrentWaypoint < sDivePaths[currentPath].size()) {
@@ -114,7 +114,7 @@ void Boss::RenderDiveState() {
 
 	int currentPath = mIndex % 2;
 
-	if (mCapture)
+	if (mCaptureDive)
 		currentPath += 2;
 
 	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
@@ -131,7 +131,7 @@ void Boss::RenderDeadState() {
 }
 
 void Boss::Dive(int type) {
-	mCapture = type != 0;
+	mCaptureDive = type != 0;
 
 	Enemy::Dive();
 }

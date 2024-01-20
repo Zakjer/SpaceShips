@@ -160,6 +160,7 @@
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="StarLayer.cpp" />
     <ClCompile Include="StartScreen.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Wasp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +190,11 @@
     <ClInclude Include="Star.h" />
     <ClInclude Include="StarLayer.h" />
     <ClInclude Include="StartScreen.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Wasp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\x64\Debug\Assets\Level1.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
