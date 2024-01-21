@@ -117,11 +117,6 @@ void Boss::RenderDiveState() {
 	if (mCaptureDive)
 		currentPath += 2;
 
-	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
-
-		Graphics::Instance()->DrawLine(mDiveStartPosition.x + sDivePaths[currentPath][i].x, mDiveStartPosition.y + sDivePaths[currentPath][i].y,
-			mDiveStartPosition.x + sDivePaths[currentPath][i + 1].x, mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y);
-	}
 }
 
 void Boss::RenderDeadState() {

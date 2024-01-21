@@ -51,17 +51,22 @@ private:
 
 	LEVEL_STATES mCurrentState;
 
+	bool mChallengeStage;
+
 	Formation* mFormation;
 
-
-	const int MAX_BUTTERFLIES = 16;
+	static const int MAX_BUTTERFLIES = 16;
 	int mButterflyCount;
 
-	const int MAX_WASPS = 20;
+	static const int MAX_WASPS = 20;
 	int mWaspCount;
 
-	const int MAX_BOSSES = 4;
+	static const int MAX_BOSSES = 4;
 	int mBossCount;
+
+	Butterfly* mFormationButterflies[MAX_BUTTERFLIES];
+	Wasp* mFormationWasps[MAX_WASPS];
+	Boss* mFormationBosses[MAX_BOSSES];
 
 	std::vector<Enemy*> mEnemies;
 
@@ -73,6 +78,22 @@ private:
 	float mSpawnDelay;
 	float mSpawnTimer;
 
+	Butterfly* mDivingButterfly;
+	bool mSkipFirstButterfly;
+	float mButterflyDiveDelay;
+	float mButterflyDiveTimer;
+
+	Wasp* mDivingWasp;
+	Wasp* mDivingWasp2;
+	float mWaspDiveDelay;
+	float mWaspDiveTimer;
+
+	Boss* mDivingBoss;
+	bool mCaptureDive;
+	bool mSkipFirstBoss;
+	float mBossDiveDelay;
+	float mBossDiveTimer;
+
 private:
 
 	void StartStage();
@@ -80,7 +101,7 @@ private:
 	void HandleCollisions();
 	void HandlePlayerDeath();
 
-
+	bool EnemyFlyingIn();
 	void HandleEnemySpawning();
 	void HandleEnemyFormation();
 	void HandleEnemyDiving();

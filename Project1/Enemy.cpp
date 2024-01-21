@@ -7,8 +7,6 @@ void Enemy::CreatePaths() {
 
 	int screenMidPoint = Graphics::Instance()->SCREEN_WIDTH * 0.4f;
 
-
-
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();
 	path->AddCurve({ Vector2(screenMidPoint + 50.0f, -10.0f), Vector2(screenMidPoint + 50.0f, -20.0f), Vector2(screenMidPoint + 50.0f, 30.0f), Vector2(screenMidPoint + 50.0f, 20.0f) }, 1);
@@ -96,7 +94,6 @@ void Enemy::PathComplete() {
 void Enemy::JoinFormation() {
 
 	Pos(WorldFormationPosition());
-	Rotation(0);
 	Parent(sFormation);
 	mCurrentState = formation;
 
@@ -155,8 +152,20 @@ void Enemy::HandleFormationState() {
 
 	Pos(LocalFormationPosition());
 
+	float rotation = Rotation();
 
+	if (rotation != 0) {
 
+		if (rotation > 2.0f) {
+			float rotationSpeed = 200.0f;
+			float rotationDir = (rotation == 180.0f) ? 1.0f : rotation - 180.0f;
+			Rotate((rotationDir / abs(rotationDir)) * mTimer->DeltaTime() * rotationSpeed);
+		}
+
+		else {
+			Rotation(0);
+		}
+	}
 }
 
 

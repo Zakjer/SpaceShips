@@ -27,7 +27,7 @@ protected:
 	int mCurrentPath;
 
 	int mCurrentWaypoint;
-	const float EPSILON = 5.0f;
+	const float EPSILON = 50.0f;
 
 	float mSpeed;
 
