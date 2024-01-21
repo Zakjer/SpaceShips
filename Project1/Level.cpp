@@ -1,5 +1,4 @@
 #include "Level.h"
-#include <iostream>
 
 Level::Level(int stage, PlaySideBar* sidebar, Player* player) {
 

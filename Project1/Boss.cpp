@@ -1,4 +1,5 @@
 #include "Boss.h"
+#include "BoxCollider.h"
 
 std::vector<std::vector<Vector2>> Boss::sDivePaths;
 
@@ -47,6 +48,8 @@ Boss::Boss(int index, int path, bool ChallengeStage)
 	mTextures[1]->Pos(VEC2_ZERO);
 
 	mType = boss;
+
+	AddCollider(new BoxCollider(mTextures[1]->ScaledDimensions()));
 }
 
 Boss::~Boss() {

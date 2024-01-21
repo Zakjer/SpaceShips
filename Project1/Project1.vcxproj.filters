@@ -40,6 +40,12 @@
     <Filter Include="Pliki źródłowe\Levels">
       <UniqueIdentifier>{68008645-2ea6-4c0b-9d85-0bf1ecfe6fed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Physics">
+      <UniqueIdentifier>{243d3157-28cc-46e7-b1ba-cda06afa751a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Physics">
+      <UniqueIdentifier>{daf85fa5-0aec-415c-990e-7a05be8c459a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.cpp">
@@ -126,6 +132,18 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Pliki źródłowe\TinyXML</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Pliki źródłowe\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysEntity.cpp">
+      <Filter>Pliki źródłowe\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Pliki źródłowe\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Pliki źródłowe\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\OneDrive\Pulpit\QuickSDL v1.0.2\AnimatedTexture.h">
@@ -211,6 +229,18 @@
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
       <Filter>Pliki nagłówkowe\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Pliki nagłówkowe\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysEntity.h">
+      <Filter>Pliki nagłówkowe\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Pliki nagłówkowe\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Pliki nagłówkowe\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

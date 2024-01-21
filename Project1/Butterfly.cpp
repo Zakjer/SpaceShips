@@ -1,4 +1,5 @@
 #include "Butterfly.h"
+#include "BoxCollider.h"
 
 std::vector<std::vector<Vector2>> Butterfly::sDivePaths;
 
@@ -73,6 +74,8 @@ Butterfly::Butterfly(int index, int path, bool challengeStage)
 	mTextures[1]->Pos(VEC2_ZERO);
 
 	mType = butterfly;
+
+	AddCollider(new BoxCollider(mTextures[1]->ScaledDimensions()));
 }
 
 

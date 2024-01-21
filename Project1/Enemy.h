@@ -3,8 +3,9 @@
 #include "../Animatedtexture.h"
 #include "BezierPath.h"
 #include "Formation.h"
+#include "PhysEntity.h"
 
-class Enemy : public GameEntity {
+class Enemy : public PhysEntity{
 
 public:
 

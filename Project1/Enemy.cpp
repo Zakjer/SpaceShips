@@ -230,12 +230,11 @@ void Enemy::RenderStates() {
 
 		RenderDeadState();
 		break;
-
-
 	}
 
-}
+	PhysEntity::Render();
 
+}
 
 Enemy::STATES Enemy::CurrentState() {
 

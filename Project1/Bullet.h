@@ -2,11 +2,11 @@
 #define _BULLET_H
 
 #include "../Timer.h"
-#include "../Texture.h"
+#include "PhysEntity.h"
 
 using namespace QuickSDL;
 
-class Bullet : public GameEntity {
+class Bullet : public PhysEntity {
 
 private:
 
