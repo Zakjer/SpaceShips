@@ -9,6 +9,7 @@ class PhysEntity : public GameEntity {
 
 protected:
 
+	unsigned long mId;
 
 	std::vector<Collider*> mColliders;
 
@@ -19,9 +20,17 @@ public:
 	PhysEntity();
 	virtual ~PhysEntity();
 
+	unsigned long GetId();
+
+	bool CheckCollision(PhysEntity* other);
+
+	virtual void Hit(PhysEntity* other);
+
 	virtual void Render();
 
 protected:
+
+	virtual bool IgnoreCollisions();
 
 	void AddCollider(Collider* collider, Vector2 localpos = VEC2_ZERO);
 };

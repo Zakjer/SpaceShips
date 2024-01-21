@@ -179,11 +179,9 @@ void Level::HandleCollisions() {
 
 	if (!mPlayerHit) {
 
-		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X)) {
+		if (mPlayer->WasHit()) {
 
-			mPlayer->WasHit();
 			mSideBar->SetShips(mPlayer->Lives());
-
 			mPlayerHit = true;
 			mPlayerRespawnTimer = 0.0f;
 			mPlayer->Active(false);

@@ -15,6 +15,7 @@ private:
 
 	bool mVisible;
 	bool mAnimating;
+	bool mWasHit;
 
 	int mScore;
 	int mLives;
@@ -30,6 +31,9 @@ private:
 	Bullet* mBullets[MAX_BULLETS];
 
 private:
+
+	bool IgnoreCollisions() override;
+
 	void HandleMovement();
 	void HandleFiring();
 
@@ -38,14 +42,16 @@ public:
 	~Player();
 
 	void Visible(bool visible);
+
+	void Hit(PhysEntity* other) override;
+	bool WasHit();
+
 	bool IsAnimating();
 
 	int Score();
 	int Lives();
 
 	void AddScore(int change);
-
-	void WasHit();
 
 	void Update();
 

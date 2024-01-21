@@ -20,7 +20,7 @@ private:
 
 public:
 
-	Bullet();
+	Bullet(bool friendly);
 
 	~Bullet();
 
@@ -28,9 +28,15 @@ public:
 
 	void Reload();
 
+	void Hit(PhysEntity* other) override;
+
 	void Update();
 
 	void Render();
+
+private:
+
+	bool IgnoreCollisions() override;
 
 };
 

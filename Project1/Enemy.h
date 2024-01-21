@@ -12,7 +12,6 @@ public:
 	enum STATES { flyIn, formation, dive, dead };
 	enum TYPES { butterfly, wasp, boss };
 
-
 protected:
 
 	static std::vector<std::vector<Vector2>> sPaths;
@@ -63,6 +62,8 @@ protected:
 	virtual void RenderDeadState() = 0;
 
 	void RenderStates();
+
+	bool IgnoreCollisions() override;
 
 
 public:

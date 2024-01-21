@@ -156,6 +156,7 @@
     <ClCompile Include="Formation.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="PhysEntity.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
     <ClCompile Include="PlaySideBar.cpp" />
@@ -190,6 +191,8 @@
     <ClInclude Include="Formation.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="PhysEntity.h" />
+    <ClInclude Include="PhysicsHelper.h" />
+    <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScreen.h" />
     <ClInclude Include="PlaySideBar.h" />
