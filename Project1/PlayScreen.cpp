@@ -63,7 +63,7 @@ void PlayScreen::StartNewGame() {
 	mPlayer->Active(false);
 
 	mStars->Scroll(false);
-	mSideBar->SetHighScore(30000);
+	mSideBar->SetHighScore(300000);
 	mSideBar->SetShips(mPlayer->Lives());
 	mSideBar->SetPlayerScore(mPlayer->Score());
 	mSideBar->SetLevel(0);
@@ -111,6 +111,7 @@ void PlayScreen::Update() {
 				}
 			}
 			mPlayer->Update();
+			mSideBar->SetPlayerScore(mPlayer->Score());
 		}
 	}
 

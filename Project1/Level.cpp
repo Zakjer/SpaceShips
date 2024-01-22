@@ -18,10 +18,9 @@ Level::Level(int stage, PlaySideBar* sidebar, Player* player) {
 	mStageLabel->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.35f, Graphics::Instance()->SCREEN_HEIGHT * 0.5f));
 
 	mStageNumber = new Scoreboard({ 75, 75, 200 });
-	mStageNumber->Score(mStage);
+	mStageNumber->Score(mStage * 10);
 	mStageNumber->Parent(this);
 	mStageNumber->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.5f, Graphics::Instance()->SCREEN_HEIGHT * 0.5f));
-
 
 	mStageLabelOnScreen = 0.0f;
 	mStageLabelOffScreen = 1.5f;
@@ -96,6 +95,8 @@ Level::Level(int stage, PlaySideBar* sidebar, Player* player) {
 	mSkipFirstBoss = true;
 	mBossDiveDelay = 5.0f;
 	mBossDiveTimer = 0.0f;
+
+	Enemy::CurrentPlayer(mPlayer);
 }
 
 Level::~Level() {
@@ -329,17 +330,38 @@ void Level::HandleEnemyFormation() {
 
 	mFormation->Update();
 
+	bool levelCleared = mSpawningFinished;
 	for (int i = 0; i < MAX_BUTTERFLIES; i++)
-		if (mFormationButterflies[i] != NULL)
+		if (mFormationButterflies[i] != NULL) {
+
 			mFormationButterflies[i]->Update();
+			if (mFormationButterflies[i]->CurrentState() != Enemy::dead || mFormationButterflies[i]->InDeathAnimation()) {
+				levelCleared = false;
+			}
+		}
 
 	for (int i = 0; i < MAX_WASPS; i++)
-		if (mFormationWasps[i] != NULL)
+		if (mFormationWasps[i] != NULL) {
 			mFormationWasps[i]->Update();
 
+			if (mFormationWasps[i]->CurrentState() != Enemy::dead || mFormationWasps[i]->InDeathAnimation()) {
+				levelCleared = false;
+			}
+		}
+
 	for (int i = 0; i < MAX_BOSSES; i++)
-		if (mFormationBosses[i] != NULL)
+		if (mFormationBosses[i] != NULL) {
 			mFormationBosses[i]->Update();
+
+			if (mFormationBosses[i]->CurrentState() != Enemy::dead || mFormationBosses[i]->InDeathAnimation()) {
+				levelCleared = false;
+			}
+		}
+
+	if (levelCleared) {
+
+		mCurrentState = finished;
+	}
 
 	if (!mFormation->Locked()) {
 
@@ -499,13 +521,6 @@ void Level::Update() {
 
 		if (mPlayerHit) {
 			HandlePlayerDeath();
-		}
-		else {
-
-			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {
-
-				mCurrentState = finished;
-			}
 		}
 	}
 }

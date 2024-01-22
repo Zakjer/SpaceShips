@@ -1,5 +1,6 @@
 #include "Boss.h"
 #include "BoxCollider.h"
+#include "../AudioManager.h"
 
 std::vector<std::vector<Vector2>> Boss::sDivePaths;
 
@@ -50,6 +51,8 @@ Boss::Boss(int index, int path, bool ChallengeStage)
 	mType = boss;
 
 	AddCollider(new BoxCollider(mTextures[1]->ScaledDimensions()));
+
+	mWasHit = false;
 }
 
 Boss::~Boss() {
@@ -105,12 +108,6 @@ void Boss::HandleDiveState() {
 
 }
 
-void Boss::HandleDeadState() {
-
-
-
-}
-
 void Boss::RenderDiveState() {
 
 	mTextures[0]->Render();
@@ -122,14 +119,34 @@ void Boss::RenderDiveState() {
 
 }
 
-void Boss::RenderDeadState() {
-
-
-
-}
-
 void Boss::Dive(int type) {
 	mCaptureDive = type != 0;
 
 	Enemy::Dive();
+}
+
+void Boss::Hit(PhysEntity* other) {
+
+	if (mWasHit) {
+
+		Enemy::Hit(other);
+		AudioManager::Instance()->PlaySFX("boss_injured.mp3", 0, 2);
+	}
+	else {
+		mWasHit = true;
+		delete mTextures[0];
+		mTextures[0] = new Texture("bosshit.png");
+		mTextures[0]->Parent(this);
+		mTextures[0]->Pos(VEC2_ZERO);
+		mTextures[0]->Rotation(0.0f);
+
+		delete mTextures[1];
+		mTextures[1] = new Texture("bosshit_animated.png");
+		mTextures[1]->Parent(this);
+		mTextures[1]->Pos(VEC2_ZERO);
+		mTextures[1]->Rotation(0.0f);
+
+		sPlayer->AddScore(mCurrentState == Enemy::formation ? 150 : mCaptureDive ? 4000 : 8000);
+		AudioManager::Instance()->PlaySFX("boss_death.mp3", 0, 1);
+	}
 }

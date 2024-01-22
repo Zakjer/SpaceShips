@@ -3,6 +3,7 @@
 
 std::vector<std::vector<Vector2>> Enemy::sPaths;
 Formation* Enemy::sFormation = NULL;
+Player* Enemy::sPlayer = nullptr;
 
 void Enemy::CreatePaths() {
 
@@ -45,6 +46,10 @@ void Enemy::SetFormation(Formation* f) {
 	sFormation = f;
 }
 
+void Enemy::CurrentPlayer(Player* player) {
+
+	sPlayer = player;
+}
 
 Enemy::Enemy(int index, int path, bool challengeStage) {
 
@@ -68,6 +73,11 @@ Enemy::Enemy(int index, int path, bool challengeStage) {
 	mChallengeStage = challengeStage;
 
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Hostile);
+
+	mDeathAnimation = new AnimatedTexture("enemyexp.png", 0, 0, 100, 128, 5, 1.0f, AnimatedTexture::horizontal);
+	mDeathAnimation->Parent(this);
+	mDeathAnimation->Pos(VEC2_ZERO);
+	mDeathAnimation->WrapMode(AnimatedTexture::once);
 }
 
 Enemy::~Enemy() {
@@ -81,8 +91,18 @@ Enemy::~Enemy() {
 
 	}
 
-	printf("Enemy destructor called\n");
+	delete mDeathAnimation;
+	mDeathAnimation = nullptr;
+}
 
+void Enemy::Hit(PhysEntity* other) {
+
+	if (mCurrentState == formation) {
+
+		Parent(nullptr);
+	}
+
+	mCurrentState = dead;
 }
 
 void Enemy::PathComplete() {
@@ -148,8 +168,6 @@ void Enemy::HandleFlyInState() {
 
 }
 
-
-
 void Enemy::HandleFormationState() {
 
 	Pos(LocalFormationPosition());
@@ -170,7 +188,13 @@ void Enemy::HandleFormationState() {
 	}
 }
 
+void Enemy::HandleDeadState() {
 
+	if (mDeathAnimation->IsAnimating()) {
+
+		mDeathAnimation->Update();
+	}
+}
 
 
 void Enemy::HandleStates() {
@@ -209,6 +233,12 @@ void Enemy::RenderFormationState() {
 
 	mTextures[sFormation->GetTick() % 2]->Render();
 
+}
+
+void Enemy::RenderDeadState() {
+
+	if (mDeathAnimation->IsAnimating())
+		mDeathAnimation->Render();
 }
 
 void Enemy::RenderStates() {
@@ -265,6 +295,11 @@ void Enemy::Dive(int type) {
 	mDiveStartPosition = Pos();
 	mCurrentWaypoint = 1;
 
+}
+
+bool Enemy::InDeathAnimation() {
+
+	return mDeathAnimation->IsAnimating();
 }
 
 void Enemy::Update() {

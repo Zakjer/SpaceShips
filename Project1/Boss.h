@@ -1,7 +1,6 @@
 #ifndef Boss_h
 #define Boss_h
 
-
 #include "Enemy.h"
 
 class Boss : public Enemy {
@@ -11,17 +10,15 @@ private:
 
 	bool mCaptureDive;
 
-private:
+	bool mWasHit;
 
+private:
 
 	Vector2 LocalFormationPosition();
 
 	void HandleDiveState();
-	void HandleDeadState();
 
 	void RenderDiveState();
-	void RenderDeadState();
-
 
 public:
 
@@ -32,6 +29,8 @@ public:
 	~Boss();
 
 	void Dive(int type = 0);
+
+	void Hit(PhysEntity* other) override;
 
 };
 

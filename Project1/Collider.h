@@ -18,7 +18,7 @@ protected:
 
 	ColliderType mType;
 
-	static const bool DEBUG_COLLIDERS = true;
+	static const bool DEBUG_COLLIDERS = false;
 	Texture* mDebugTexture;
 
 

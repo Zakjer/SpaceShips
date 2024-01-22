@@ -1,5 +1,6 @@
 #include "Wasp.h"
 #include "BoxCollider.h"
+#include "../AudioManager.h"
 
 std::vector<std::vector<Vector2>> Wasp::sDivePaths;
 
@@ -64,7 +65,6 @@ Wasp::~Wasp() {
 
 }
 
-
 void Wasp::PathComplete() {
 
 	Enemy::PathComplete();
@@ -79,7 +79,6 @@ void Wasp::FlyInComplete() {
 		JoinFormation();
 
 }
-
 
 Vector2 Wasp::LocalFormationPosition() {
 
@@ -117,26 +116,18 @@ void Wasp::HandleDiveState() {
 
 		if (dist.MagnitudeSqr() < EPSILON)
 			JoinFormation();
-
 	}
-
-}
-
-
-void Wasp::HandleDeadState() {
-
-
 
 }
 
 void Wasp::RenderDiveState() {
 
 	mTextures[0]->Render();
-
-
 }
 
-void Wasp::RenderDeadState() {
+void Wasp::Hit(PhysEntity* other) {
 
-
+	AudioManager::Instance()->PlaySFX("enemy_death.mp3", 0, 4);
+	sPlayer->AddScore(mCurrentState == Enemy::formation ? 500 : 1000);
+	Enemy::Hit(other);
 }

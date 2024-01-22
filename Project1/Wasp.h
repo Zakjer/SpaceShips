@@ -19,12 +19,9 @@ private:
 	Vector2 LocalFormationPosition();
 
 	void HandleDiveState();
-	void HandleDeadState();
+
 
 	void RenderDiveState();
-	void RenderDeadState();
-
-
 
 public:
 
@@ -34,8 +31,8 @@ public:
 	Wasp(int index, int path, bool challengeStage, bool diver);
 	~Wasp();
 
+	void Hit(PhysEntity* other) override;
 
 };
-
 
 #endif

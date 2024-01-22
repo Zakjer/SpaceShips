@@ -1,5 +1,7 @@
 #include "Butterfly.h"
 #include "BoxCollider.h"
+#include "CircleCollider.h"
+#include "../AudioManager.h"
 
 std::vector<std::vector<Vector2>> Butterfly::sDivePaths;
 
@@ -78,13 +80,11 @@ Butterfly::Butterfly(int index, int path, bool challengeStage)
 	AddCollider(new BoxCollider(mTextures[1]->ScaledDimensions()));
 }
 
-
 Butterfly::~Butterfly() {
 
 
 
 }
-
 
 Vector2 Butterfly::LocalFormationPosition() {
 
@@ -131,17 +131,8 @@ void Butterfly::HandleDiveState() {
 	}
 }
 
-void Butterfly::HandleDeadState() {
-
-
-}
-
 void Butterfly::RenderDiveState() {
 	mTextures[0]->Render();
-
-}
-
-void Butterfly::RenderDeadState() {
 
 }
 
@@ -149,4 +140,11 @@ void Butterfly::Dive(int type) {
 	mEscort = type != 0;
 
 	Enemy::Dive();
+}
+
+void Butterfly::Hit(PhysEntity* other) {
+
+	AudioManager::Instance()->PlaySFX("enemy_death.mp3", 0, 3);
+	sPlayer->AddScore(mCurrentState == Enemy::formation ? 800 : 1600);
+	Enemy::Hit(other);
 }

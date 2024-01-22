@@ -15,10 +15,8 @@ private:
 	Vector2 LocalFormationPosition();
 
 	void HandleDiveState();
-	void HandleDeadState();
 
 	void RenderDiveState();
-	void RenderDeadState();
 
 public:
 
@@ -29,6 +27,8 @@ public:
 	~Butterfly();
 
 	void Dive(int type = 0);
+
+	void Hit(PhysEntity* other) override;
 
 };
 
